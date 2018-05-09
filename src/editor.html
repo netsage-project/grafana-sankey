@@ -1,0 +1,78 @@
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Links Options</h5> 
+    <div class="gf-form">
+        <label class="gf-form-label width-9">Aggregation</label>
+        <div class="gf-form-select-wrapper width-8">
+            <select class="input-small gf-form-input" ng-model="ctrl.panel.aggregation" ng-options="s for s in ctrl.panel.aggregation_options" ng-change="ctrl.refresh()" ></select>
+        </div>
+    </div>
+
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Link Width Metric</label>
+        <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.link_width_input">
+    </div>
+
+    <div class="gf-form"> 
+        <gf-form-switch class="gf-form" label-class="width-14" 
+            label="Convert Units to Bytes"
+            checked="ctrl.panel.to_Byte" on-change="ctrl.render()">
+        </gf-form-switch>
+    </div>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Nodes Options</h5>
+    <div ng-repeat="x in ctrl.panel.choices track by $index">
+        <div class="gf-form">
+          <label class="gf-form-label width-8">node {{$index}}</label>
+            <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.option_nodes[$index]">
+    
+            <div class="gf-form" ng-if="$last">
+              <button class="btn btn-inverse gf-form-btn" ng-click="ctrl.removeChoice($index)">-</button>
+            </div>
+        </div>
+    </div>
+    <button class="gf-form-input width-3" ng-click="ctrl.addNewChoice()">+</button>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Apply Changes</h5>
+    <button class="gf-form-input width-6" ng-click="ctrl.render()">Apply</button>
+</div>
+
+<!--
+<div class="section gf-form-group">
+  <h5 class="section-heading">Type</h5>
+
+  <div class="gf-form">
+    <label class="gf-form-label width-11">Type</label>
+    <div class="gf-form-select-wrapper width-16">
+      <select class="gf-form-input" ng-model="style.type" ng-options="c.value as c.text for c in editor.columnTypes" ng-change="editor.render()"></select>
+    </div>
+  </div>
+  <div class="gf-form"  ng-if="style.type === 'date'">
+    <label class="gf-form-label width-11">Date Format</label>
+    <div class="gf-form-select-wrapper width-16">
+      <select class="gf-form-input" ng-model="style.dateFormat" ng-options="c.value as c.text for c in editor.dateFormats" ng-change="editor.render()"></select>
+    </div>
+  </div>
+
+  <div ng-if="style.type === 'string'">
+    <gf-form-switch class="gf-form" label-class="width-11" ng-if="style.type === 'string'" label="Sanitize HTML" checked="style.sanitize" change="editor.render()"></gf-form-switch>
+  </div>
+  <div ng-if="style.type === 'string'">
+    <gf-form-switch class="gf-form" label-class="width-11" ng-if="style.type === 'string'" label="Preserve Formatting" checked="style.preserveFormat" change="editor.render()"></gf-form-switch>
+  </div>
+
+  <div ng-if="style.type === 'number'">
+    <div class="gf-form">
+      <label class="gf-form-label width-11">Unit</label>
+      <div class="gf-form-dropdown-typeahead width-16" ng-model="style.unit" dropdown-typeahead2="editor.unitFormats" dropdown-typeahead-on-select="editor.setUnitFormat(style, $subItem)"></div>
+    </div>
+    <div class="gf-form">
+      <label class="gf-form-label width-11">Decimals</label>
+      <input type="number" class="gf-form-input width-4" data-placement="right" ng-model="style.decimals" ng-change="editor.render()" ng-model-onblur>
+    </div>
+  </div>
+</div>
+-->
