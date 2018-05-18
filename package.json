@@ -32,7 +32,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-execute": "~0.2.2",
     "grunt-systemjs-builder": "^0.2.5",
-    "gulp": "~3.9.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-callback": "^0.0.3",
     "gulp-concat": "^2.3.4",
