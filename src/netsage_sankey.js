@@ -458,6 +458,51 @@ var sankeyData = [
             .links(graph.links)
             .layout(32);
 
+          // move nodes down to make space for labels
+          for(let i=0; i< sankey.nodes().length; i++){
+            if(sankey.nodes()[i].y < 25){
+              sankey.nodes()[i].y = 25;
+            }
+          }
+          sankey.relayout();
+
+          // create node location object
+          var nodeLocations = {}
+          // store only unique x positions of the nodes
+          _.forEach(graph.nodes, function(n) {
+            if (!(n.x in nodeLocations)){
+              nodeLocations[(n.x+n.dx/2)]=1;
+            }
+          });
+          // convert from string to Numbers
+          nodeLocations = Object.keys(nodeLocations).map(Number);
+          nodeLocations = nodeLocations.sort((a, b) => a - b);
+          // add first value to last node value
+          nodeLocations[nodeLocations.length-1] += nodeLocations[0];
+          // set first value to 0
+          nodeLocations[0] = 0;
+
+          // add node labels
+          var node_labels = svg.append("g").selectAll(".node-label")
+            .data(ctrl.panel.option_nodes)
+            .enter().append("text")
+            .attr("class", "node-label")
+            .attr("x", function(d) {return nodeLocations[ctrl.panel.option_nodes.indexOf(d)]} )
+            .attr("y", (margin.top+5))
+            .attr("text-anchor", function(d){
+              switch(ctrl.panel.option_nodes.indexOf(d)){
+                case 0:
+                  return "start";
+                case ctrl.panel.option_nodes.length-1:
+                  return "end";
+                default:
+                  return "middle";
+              }})
+            .text(function(d) { return d.replace('meta.','')
+                                        .replace(new RegExp('_','g'),' ')
+                                        .replace('src','Source')
+                                        .replace('dst','Destination')} );
+
           // add in the links
           var link = svg.append("g").selectAll(".link")
               .data(graph.links)
@@ -528,8 +573,22 @@ var sankeyData = [
           node.append("rect")
               .attr("height", function(d) { return d.dy; })
               .attr("width", sankey.nodeWidth())
+              .attr("rx", 3)
               .style("fill", function(d) {
-              return d.color = color(d.name.replace(/ .*/, "")); })
+                d.color = "#cdcdcd"
+                if (d.targetLinks.length === 0){
+                  d.color = color(d.name.replace(/ .*/, ""));
+                  let cl = [];
+                  _.forEach(d.sourceLinks, function(sl){
+                    cl.push(sl.label);
+                  });
+                  _.forEach(cl, function(flow){
+                    _.forEach(document.getElementsByClassName(flow), function(el) {
+                      el.style.cssText += "stroke:"+d.color+";";
+                    });
+                  });
+                }
+                return d.color })
               .style("stroke", function(d) {
               return d3.rgb(d.color).darker(2); })
             .append("title")
