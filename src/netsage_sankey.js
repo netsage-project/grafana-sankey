@@ -408,7 +408,8 @@ export class NetSageSankey extends MetricsPanelCtrl {
                 sankeyData.push({"source":source,
                                  "target":target,
                                   "value":value,
-                                  "label":"flow-"+index});
+                                  //"label":"flow-"+index});
+                                  "label":ctrl.sankeynetsage_holder_id+"_flow-"+index});
               }
             });
           }
@@ -442,7 +443,8 @@ export class NetSageSankey extends MetricsPanelCtrl {
                 sankeyData.push({"source":source,
                                  "target":target,
                                   "value":value,
-                                  "label":"flow-"+index});
+                                  //"label":"flow-"+index});
+                                  "label":ctrl.sankeynetsage_holder_id+"_flow-"+index});
               }
             });
           }
