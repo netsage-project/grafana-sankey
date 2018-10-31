@@ -1,0 +1,39 @@
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Link Label</h5> 
+    <div class="gf-form">
+      <label class="gf-form-label width-8">Link Width</label>
+        <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.table_editor_link_width_label">
+    </div>
+
+    <div class="gf-form">
+      <label class="gf-form-label width-6">Unit</label>
+      <div class="gf-form-dropdown-typeahead max-width-18" ng-model="ctrl.panel.table_editor_unitFormats" dropdown-typeahead2="ctrl.panel.table_editor_unitFormats_TEMP" dropdown-typeahead-on-select="ctrl.setUnitFormat($subItem)"></div>
+      <!--div class="gf-form-dropdown-typeahead max-width-16" ng-model="yaxis.format" dropdown-typeahead2="ctrl.unitFormats" dropdown-typeahead-on-select="ctrl.setUnitFormat(yaxis, $subItem)"></div-->
+    </div>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Nodes Labels</h5>
+    <div ng-repeat="x in ctrl.panel.table_editor_choices track by $index">
+        <div class="gf-form">
+          <label class="gf-form-label width-8">Node {{$index}}</label>
+            <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.table_editor_node_labels[$index]">
+    
+            <div class="gf-form" ng-if="$last">
+              <button class="btn btn-inverse gf-form-btn" ng-click="ctrl.table_editor_removeChoice($index)">-</button>
+            </div>
+        </div>
+    </div>
+    <button class="gf-form-input width-3" ng-click="ctrl.table_editor_addNewChoice()">+</button>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Apply Changes</h5>
+    <button class="gf-form-input width-6" ng-click="ctrl.render()">Apply</button>
+</div>
+
+<div class="gf-form-group">
+  <div class="gf-form gf-form--grow">
+    <label class="gf-form-label gf-form-label--grow">These options take effect when using Aggregated data (type: 'table') for the Sankey plugin</label>
+  </div>
+</div>

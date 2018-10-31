@@ -139,7 +139,9 @@ var buildAll = function(options){
     gulp.src('plugin.json').pipe(gulp.dest('./dist'));
     gulp.src('src/module.html').pipe(gulp.dest('./dist'));
     gulp.src('src/editor.html').pipe(gulp.dest('./dist'));
-    gulp.src('src/display_editor.html').pipe(gulp.dest('./dist'));
+    gulp.src('src/docs_editor.html').pipe(gulp.dest('./dist'));
+    gulp.src('src/table_editor.html').pipe(gulp.dest('./dist'));
+    //gulp.src('src/display_editor.html').pipe(gulp.dest('./dist'));
     createPlugin({ files: [ './src/*.js',]});
 
     //create the d3.v3

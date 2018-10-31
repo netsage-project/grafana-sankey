@@ -31,6 +31,9 @@ FILES += "src/module.js"
 FILES += "src/$(PREV_UNDERSCORE_NAME).js"
 FILES += "src/css/$(PREV_SHORT_NAME).css"
 
+install: | build plugin install_plugin reload
+quick_install: | gulp_only plugin install_plugin reload
+
 reload:
 		sudo systemctl stop grafana-server
 		sleep 1
@@ -39,13 +42,15 @@ build:
 		npm install -g gulp
 		npm install
 		gulp
-plugin: build
+gulp_only:
+		gulp
+plugin:
 		#rm -rf netsage-boilerplate/
 		mv dist/ $(NAME)/
-install: plugin
+install_plugin:
 		sudo rm -rf /var/lib/grafana/plugins/$(NAME)/
 		sudo mv $(NAME)/ /var/lib/grafana/plugins/
-		$(MAKE) reload
+		#$(MAKE) reload
 name_change:
 		@#most likely requires vim to work properly
 		@for f in $(FILES); do \

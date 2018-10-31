@@ -1,0 +1,47 @@
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Links Options</h5> 
+    <div class="gf-form">
+        <label class="gf-form-label width-9">Aggregation</label>
+        <div class="gf-form-select-wrapper width-8">
+            <select class="input-small gf-form-input" ng-model="ctrl.panel.docs_editor_aggregation" ng-options="s for s in ctrl.panel.docs_editor_aggregation_options" ng-change="ctrl.refresh()" ></select>
+        </div>
+    </div>
+
+    <div class="gf-form">
+      <label class="gf-form-label width-9">Link Width Metric</label>
+        <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.docs_editor_link_width_input">
+    </div>
+
+    <div class="gf-form"> 
+        <gf-form-switch class="gf-form" label-class="width-14" 
+            label="Convert Units to Bytes"
+            checked="ctrl.panel.docs_editor_to_Byte" on-change="ctrl.render()">
+        </gf-form-switch>
+    </div>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Sankey Nodes Options</h5>
+    <div ng-repeat="x in ctrl.panel.docs_editor_choices track by $index">
+        <div class="gf-form">
+          <label class="gf-form-label width-8">Node {{$index}}</label>
+            <input type="text" class="gf-form-input width-16 ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="" ng-model="ctrl.panel.docs_editor_option_nodes[$index]">
+    
+            <div class="gf-form" ng-if="$last">
+              <button class="btn btn-inverse gf-form-btn" ng-click="ctrl.docs_editor_removeChoice($index)">-</button>
+            </div>
+        </div>
+    </div>
+    <button class="gf-form-input width-3" ng-click="ctrl.docs_editor_addNewChoice()">+</button>
+</div>
+
+<div class="section gf-form-group">
+    <h5 class="section-heading">Apply Changes</h5>
+    <button class="gf-form-input width-6" ng-click="ctrl.render()">Apply</button>
+</div>
+
+<div class="gf-form-group">
+  <div class="gf-form gf-form--grow">
+    <label class="gf-form-label gf-form-label--grow">These options take effect when using Raw Document data (type: 'docs') for the Sankey plugin</label>
+  </div>
+</div>
