@@ -397,11 +397,11 @@ export class NetSageSankey extends MetricsPanelCtrl {
                 // to avoid cyclic sankey, appending (src) and (dst) to names
                 let source_option=ctrl.panel.docs_editor_option_nodes[i];
                 let target_option=ctrl.panel.docs_editor_option_nodes[i+1];
-                source += ((source_option.includes("src_") || source_option.includes("dst_")) ?
-                             (source_option.includes("src_") ? " (src)" : " (dst)") :
+                source += ((source_option.includes("src") || source_option.includes("dst")) ?
+                             (source_option.includes("src") ? " (src)" : " (dst)") :
                            "");
-                target += ((target_option.includes("src_") || target_option.includes("dst_")) ?
-                             (target_option.includes("src_") ? " (src)" : " (dst)") :
+                target += ((target_option.includes("src") || target_option.includes("dst")) ?
+                             (target_option.includes("src") ? " (src)" : " (dst)") :
                            "");
 
                 // add to sankeyData array
@@ -432,11 +432,11 @@ export class NetSageSankey extends MetricsPanelCtrl {
                 // to avoid cyclic sankey, appending (src) and (dst) to names
                 let source_option=ctrl.panel.table_editor_option_nodes[i];
                 let target_option=ctrl.panel.table_editor_option_nodes[i+1];
-                source += ((source_option.includes("src_") || source_option.includes("dst_")) ?
-                             (source_option.includes("src_") ? " (src)" : " (dst)") :
+                source += ((source_option.includes("src") || source_option.includes("dst")) ?
+                             (source_option.includes("src") ? " (src)" : " (dst)") :
                            "");
-                target += ((target_option.includes("src_") || target_option.includes("dst_")) ?
-                             (target_option.includes("src_") ? " (src)" : " (dst)") :
+                target += ((target_option.includes("src") || target_option.includes("dst")) ?
+                             (target_option.includes("src") ? " (src)" : " (dst)") :
                            "");
 
                 // add to sankeyData array
@@ -582,6 +582,7 @@ export class NetSageSankey extends MetricsPanelCtrl {
             .text(function(d) { return d.replace('meta.','')
                                         .replace('.keyword','')
                                         .replace(new RegExp('_','g'),' ')
+                                        .replace(new RegExp('[.]','g'),' ')
                                         .replace('src','Source')
                                         .replace('dst','Destination')} );
 

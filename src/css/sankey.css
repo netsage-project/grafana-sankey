@@ -23,7 +23,10 @@
   stroke-opacity: .4;
 }
 .link-highlight{
-  stroke-opacity: .8;
+  /*stroke-opacity: .8;*/
+  stroke-opacity: 1;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
   /*stroke: #f8ae63;*/
   /*stroke: #FF8000;*/
 }
