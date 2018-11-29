@@ -14,6 +14,10 @@
 
 <div class="section gf-form-group">
     <h5 class="section-heading">Sankey Nodes Labels</h5>
+    <gf-form-switch class="gf-form" label-class="width-8"
+        label="AutoFormat"
+        checked="ctrl.panel.auto_format_labels" on-change="ctrl.render()">
+    </gf-form-switch>
     <div ng-repeat="x in ctrl.panel.table_editor_choices track by $index">
         <div class="gf-form">
           <label class="gf-form-label width-8">Node {{$index}}</label>

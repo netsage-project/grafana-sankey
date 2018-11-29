@@ -53,6 +53,7 @@ const panelDefaults = {
     table_data_type: '',
     table_data: [],
     // other variables
+    auto_format_labels: false,
     label_nodes: [],
     data_type: "",
     // other unused variables
@@ -563,6 +564,18 @@ export class NetSageSankey extends MetricsPanelCtrl {
           // set first value to 0
           nodeLocations[0] = 0;
 
+          function auto_format_node_labels(nodeName) {
+            if(ctrl.panel.auto_format_labels){
+              return nodeName.replace('meta.','')
+                      .replace('.keyword','')
+                      .replace(new RegExp('_','g'),' ')
+                      .replace(new RegExp('[.]','g'),' ')
+                      .replace('src','Source')
+                      .replace('dst','Destination');
+            }
+            // other wise return same name
+            return nodeName;
+          }
           // add node labels
           var node_labels = svg.append("g").selectAll(".node-label")
             .data(ctrl.panel.label_nodes)
@@ -579,12 +592,7 @@ export class NetSageSankey extends MetricsPanelCtrl {
                 default:
                   return "middle";
               }})
-            .text(function(d) { return d.replace('meta.','')
-                                        .replace('.keyword','')
-                                        .replace(new RegExp('_','g'),' ')
-                                        .replace(new RegExp('[.]','g'),' ')
-                                        .replace('src','Source')
-                                        .replace('dst','Destination')} );
+            .text(function(d) { return auto_format_node_labels(d)} );
 
           // add in the links
           var link = svg.append("g").selectAll(".link")
